@@ -20,12 +20,32 @@ ${VISUAL}${0}
 #endif
 endsnippet
 
-snippet inc "#include local header (inc)"
-#include "${1:`!p snip.rv = snip.basename + '.h'`}"
+snippet stdio "stdio header file" b
+#include <stdio.h>$0
 endsnippet
 
-snippet Inc "#include <> (Inc)"
-#include <${1:.h}>
+snippet unistd "unistd header file" b
+#include <unistd.h>$0
+endsnippet
+
+snippet strings "strings header file" b
+#include <strings.h>$0
+endsnippet
+
+snippet string "string header file" b
+#include <string.h>$0
+endsnippet
+
+snippet math "math header file" b
+#include <math.h>$0
+endsnippet
+
+snippet is "include standard headers" b
+#include <${1}>$0
+endsnippet
+
+snippet io "include other headers" b
+#include "${1:`!p snip.rv = snip.basename + '.h'`}"
 endsnippet
 
 snippet mark "#pragma mark (mark)"
@@ -37,23 +57,29 @@ ${1:#pragma mark -
 $0
 endsnippet
 
-snippet main "main() (main)"
-int main(int argc, char *argv[])
-{
-	${VISUAL}${0}
+#snippet main "main()" w
+#int main(${1}${1/int/(?1: argc, char *argv[]:)/}) {
+#	$0${VISUAL}
+#	return 0;
+#}
+#endsnippet
+
+snippet main "main()" w
+int main(${1}) {
+	${0}${VISUAL}
 	return 0;
 }
 endsnippet
 
-snippet for "for loop (for)"
-for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+snippet for "for loop" w
+for ($1) {
 	${VISUAL}${0}
 }
 endsnippet
 
-snippet fori "for int loop (fori)"
-for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
-	${VISUAL}${0}
+snippet while "while loop" w
+while ($1) {
+	${VISUAL}$0
 }
 endsnippet
 
@@ -77,29 +103,31 @@ ${VISUAL}${0}
 #endif /* end of include guard: $1 */
 endsnippet
 
-snippet td "Typedef"
-typedef ${1:int} ${2:MyCustomType};
-endsnippet
-
-snippet wh "while loop"
-while(${1:/* condition */}) {
-	${VISUAL}${0}
-}
-endsnippet
-
 snippet do "do...while loop (do)"
 do {
-	${VISUAL}${0}
-} while(${1:/* condition */});
+	${VISUAL}${1}
+} while(${0});
 endsnippet
 
 snippet fprintf "fprintf ..."
 fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
-snippet eli "else if .. (eli)"
-else if (${1:/* condition */}) {
-	${VISUAL}${0}
+snippet /* "/*...*/" w
+/* ${VISUAL}$0 */
+endsnippet
+
+# the regex pattern is for excluding
+# `#if` from matches
+snippet "(^|[^#])\bif" "if" r
+if ($1) {
+	$0${VISUAL}
+}
+endsnippet
+
+snippet else "else" w
+else {
+	$0${VISUAL}
 }
 endsnippet
 
@@ -113,15 +141,11 @@ struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
 };
 endsnippet
 
-snippet fun "function" b
-${1:void} ${2:function_name}(${3})
+snippet func "function" b
+$1
 {
 	${VISUAL}${0}
 }
-endsnippet
-
-snippet fund "function declaration" b
-${1:void} ${2:function_name}(${3});
 endsnippet
 
 # vim:ft=snippets:
