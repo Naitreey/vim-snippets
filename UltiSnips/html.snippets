@@ -15,31 +15,13 @@ endglobal
 ############
 # Doctypes #
 ############
-snippet doctype "DocType XHTML 1.0 Strict" b
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-endsnippet
-
-snippet doctype "DocType XHTML 1.0 Transitional" b
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-endsnippet
-
-snippet doctype "DocType XHTML 1.1" b
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-endsnippet
-
-snippet doctype "HTML - 4.0 Transitional (doctype)" b
+snippet html4 "HTML - 4.0 Transitional (doctype)" b
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
 
 endsnippet
 
-snippet doctype "HTML - 5.0 (doctype)" b
+snippet html5 "HTML - 5.0 (doctype)" b
 <!DOCTYPE html>
 
 endsnippet
@@ -87,6 +69,10 @@ snippet option "Option (option)"
 &#x2325;
 endsnippet
 
+snippet com "<--! comment -->" b
+<!-- $0${VISUAL} -->
+endsnippet
+
 #######################
 # Conditional inserts #
 #######################
@@ -125,14 +111,41 @@ endsnippet
 #############
 # HTML TAGS #
 #############
-snippet input "Input with Label" w
-<label for="${2:${1/[[:alpha:]]+|( )/(?1:_:\L$0)/g}}">$1</label><input type="${3:text/submit/hidden/button}" name="${4:$2}" value="$5"${6: id="${7:$2}"}`!p x(snip)`>
-
+#snippet input "Input with Label" w
+#<label for="${2:${1/[[:alpha:]]+|( )/(?1:_:\L$0)/g}}">$1</label><input type="${3:text/submit/hidden/button}" name="${4:$2}" value="$5"${6: id="${7:$2}"}`!p x(snip)`>
+#
+#endsnippet
+snippet img "image tag" w
+<img src="$1" />
 endsnippet
 
-snippet input "XHTML   <input>" w
-<input type="${1:text/submit/hidden/button}" name="${2:some_name}" value="$3"${4: id="${5:$2}"}`!p x(snip)`>
+snippet ol "ordered list" b
+<ol>
+	$0${VISUAL}
+</ol>
 endsnippet
+
+snippet html "html element" w
+<html>
+	$0${VISUAL}
+</html>
+endsnippet
+
+snippet label "label" w
+<label for="$1">$0${VISUAL}</label>
+endsnippet
+
+snippet span "<span>" w
+<span$1>$0${VISUAL}</span>
+endsnippet
+
+snippet input "input" w
+<input id="$1"${2: name="$3"} type="$4"/>$0
+endsnippet
+
+#snippet input "XHTML   <input>" w
+#<input type="${1:text/submit/hidden/button}" name="${2:some_name}" value="$3"${4: id="${5:$2}"}`!p x(snip)`>
+#endsnippet
 
 
 snippet opt "Option" w
@@ -157,7 +170,7 @@ snippet mailto "XHTML <a mailto: >" w
 endsnippet
 
 snippet base "XHTML <base>" w
-<base href="$1"${2: target="$3"}`!p x(snip)`>
+<base href="$1" />
 endsnippet
 
 snippet body "<body>"
@@ -166,9 +179,27 @@ snippet body "<body>"
 </body>
 endsnippet
 
-snippet div "<div>" w
-<div>
+snippet frameset "<frameset>" w
+<frameset$1>
 	$0
+</frameset>
+endsnippet
+
+snippet frame "<frame>" w
+<frame src="$1"/>
+endsnippet
+
+snippet i "italic" w
+<i$1>$2${VISUAL}</i>$0
+endsnippet
+
+snippet button "<button>" w
+<button type="$1">$2${VISUAL}</button>$0
+endsnippet
+
+snippet div "<div>" w
+<div$1>
+	$0${VISUAL}
 </div>
 endsnippet
 
@@ -184,13 +215,19 @@ snippet div# "<div> with ID & class" w
 </div>
 endsnippet
 
-snippet form "XHTML <form>" w
-<form action="${1:`!p
-snip.rv = (snip.basename or 'unnamed') + '_submit'
-`}" method="${2:get}" accept-charset="utf-8">
-	$0
+#snippet form "XHTML <form>" w
+#<form action="${1:`!p
+#snip.rv = (snip.basename or 'unnamed') + '_submit'
+#`}" method="${2:get}" accept-charset="utf-8">
+#	$0
+#
+#	<p><input type="submit" value="Continue →"`!p x(snip)`></p>
+#</form>
+#endsnippet
 
-	<p><input type="submit" value="Continue →"`!p x(snip)`></p>
+snippet form "<form>" w
+<form action="$1" method="$2" enctype="${3:application/x-www-form-urlencoded}" accept-charset="${4:utf-8}">
+	$0${VISUAL}
 </form>
 endsnippet
 
@@ -210,73 +247,145 @@ snippet h4 "XHTML <h4>" w
 <h4>$0</h4>
 endsnippet
 
-snippet head "XHTML <head>"
-<head>
-	<meta charset="utf-8">
-	<title>${1:`!p snip.rv = snip.basename or "Page Title"`}</title>
-	$0
-</head>
+snippet h5 "XHTML <h4>" w
+<h5>$0</h5>
 endsnippet
 
-snippet link "XHTML <link>" w
-<link rel="${1:stylesheet}" href="${2:/css/master.css}" type="text/css" media="${3:screen}" title="${4:no title}" charset="${5:utf-8}"`!p x(snip)`>
+snippet head "XHTML <head>"
+<head>
+	<meta charset="utf-8" />
+	<title>${1:`!p snip.rv = snip.basename or "Page Title"`}</title>
+	$0${VISUAL}
+</head>
 endsnippet
 
 snippet meta "XHTML <meta>" w
 <meta name="${1:name}" content="${2:content}"`!p x(snip)`>
 endsnippet
 
+snippet link "HTML <link>" w
+<link rel="${1:stylesheet}" href="${2}" type="text/css" charset="${5:utf-8}"`!p x(snip)` />
+endsnippet
+
 snippet scriptsrc "XHTML <script src...>" w
-<script src="$1" type="text/javascript" charset="${3:utf-8}"></script>
+<script type="text/javascript" src="$1" charset="${3:utf-8}"></script>
 endsnippet
 
 snippet script "XHTML <script>" w
-<script type="text/javascript" charset="utf-8">
-	$0
+<script type="text/javascript">
+	$0${VISUAL}
 </script>
 endsnippet
 
 snippet style "XHTML <style>" w
-<style type="text/css" media="screen">
+<style type="text/css">
 	$0
 </style>
 endsnippet
 
-snippet table "XHTML <table>" w
-<table border="${1:0}"${2: cellspacing="${3:5}" cellpadding="${4:5}"}>
-	<tr><th>${5:Header}</th></tr>
-	<tr><td>${0:Data}</td></tr>
+snippet table "<table>" w
+<table$1>
+	$0${VISUAL}
 </table>
 endsnippet
 
+#snippet table "XHTML <table>" w
+#<table border="${1:0}"${2: cellspacing="${3:5}" cellpadding="${4:5}"}>
+#	<tr><th>${5:Header}</th></tr>
+#	<tr><td>${0:Data}</td></tr>
+#</table>
+#endsnippet
+
 snippet a "Link" w
-<a href="${1:http://www.${2:url.com}}"${3: target="_blank"}>${4:Anchor Text}</a>
+<a href="$1">$0${VISUAL}</a>
+endsnippet
+
+snippet em "emphasize" w
+<em>$0${VISUAL}</em>
 endsnippet
 
 snippet p "paragraph" w
-<p>$0</p>
+<p>$0${VISUAL}</p>
 endsnippet
 
 snippet li "list item" w
-<li>$0</li>
+<li>$0${VISUAL}</li>
 endsnippet
 
 snippet ul "unordered list" w
 <ul>
-$0
+	$0${VISUAL}
 </ul>
 endsnippet
 
+snippet dl "description list" w
+<dl>
+	$0${VISUAL}
+</dl>
+endsnippet
+
+snippet dt "description term" w
+<dt>$0${VISUAL}</dt>
+endsnippet
+
+snippet dd "description data" w
+<dd>
+	$0${VISUAL}
+</dd>
+endsnippet
+
 snippet td "table cell" w
-<td>$0</td>
+<td>$1${VISUAL}</td>$0
 endsnippet
 
 snippet th "table header" w
-<th>$0</th>
+<th>$1</th>$0
+endsnippet
+
+snippet pre "preformatted text" w
+<pre>
+	$0${VISUAL}
+</pre>
+endsnippet
+
+snippet code "inline code" w
+<code>$1${VISUAL}</code>$0
+endsnippet
+
+snippet codeblock "code block/listing" w
+<pre><code>
+	$0${VISUAL}
+</code></pre>
+endsnippet
+
+snippet thead "table header group" w
+<thead>
+	$0
+</thead>
+endsnippet
+
+snippet tfoot "table footer group" w
+<tfoot>
+	$0
+</tfoot>
+endsnippet
+
+snippet tbody "table body group" w
+<tbody>
+	$0
+</tbody>
 endsnippet
 
 snippet tr "table row" w
-<tr>$0</tr>
+<tr>
+	$1${VISUAL}
+</tr>$0
+endsnippet
+
+snippet caption "table caption" w
+<caption>
+	$1
+</caption>$0
 endsnippet
 
 snippet title "XHTML <title>" w
@@ -286,7 +395,7 @@ endsnippet
 snippet fieldset "Fieldset" w
 <fieldset id="${1/[\w\d]+|( )/(?1:_:\L$0\E)/g}" ${2:class="${3:}"}>
 	<legend>$1</legend>
-	$0
+	$0${VISUAL}
 </fieldset>
 endsnippet
 
@@ -302,5 +411,15 @@ snippet movie "Embed QT movie (movie)" b
 		pluginspage="http://www.apple.com/quicktime/download/"
 	`!p x(snip)`>
 </object>
+endsnippet
+
+snippet video "HTML5 <video>" w
+<video>
+	$0
+</video>
+endsnippet
+
+snippet source "HTML5 source of video" w
+<source src="$1" type="$2" />
 endsnippet
 # vim:ft=snippets:
