@@ -77,9 +77,9 @@ endsnippet
 # endsnippet
 
 
-snippet for "for" b
-{% for ${1:item} in ${2:sequence} %}
-	$3
+snippet for "{% for %}" b
+{% for $1 %}
+${VISUAL}$0
 {% endfor %}
 endsnippet
 
@@ -93,9 +93,9 @@ snippet for "for/else" b
 endsnippet
 
 
-snippet if "if" b
-{% if ${1:expr} %}
-	$2
+snippet if "{% if %}" b
+{% if $1 %}
+${VISUAL}$0
 {% endif %}
 endsnippet
 
@@ -120,9 +120,19 @@ snippet if "if/elif/else" b
 endsnippet
 
 
-snippet macro "macro" b
-{% macro ${1:name}(${2:args}) %}
-	$3
+snippet elif "{% elif %}" b
+{% elif $0 %}
+endsnippet
+
+
+snippet else "{% else %}" b
+{% else %}
+endsnippet
+
+
+snippet macro "{% macro %}" b
+{% macro $1 %}
+${VISUAL}$0
 {% endmacro %}
 endsnippet
 
@@ -134,8 +144,8 @@ snippet call "call" b
 endsnippet
 
 
-snippet set "set" b
-{% set ${1:name} = ${2:'value'} %}
+snippet set "{% set %}" b
+{% set $0 %}
 endsnippet
 
 
