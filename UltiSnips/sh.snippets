@@ -49,19 +49,19 @@ esac
 endsnippet
 
 snippet elif "elif .. (elif)"
-elif ${2:[[ ${1:condition} ]]}; then
-	${0:#statements}
+elif $1; then
+	${0}${VISUAL}
 endsnippet
 
 snippet for "for ... done (for)"
-for (( i = 0; i < ${1:10}; i++ )); do
-	${0:#statements}
+for (( i = 0; i < ${1}; i++ )); do
+	${0}${VISUAL}
 done
 endsnippet
 
 snippet forin "for ... in ... done (forin)"
 for ${1:i}${2/.+/ in /}${2:words}; do
-	${0:#statements}
+	${0}${VISUAL}
 done
 endsnippet
 
@@ -72,8 +72,8 @@ ${1/['"`](.+)['"`]/$1/}
 endsnippet
 
 snippet if "if ... then (if)"
-if ${2:[[ ${1:condition} ]]}; then
-	${0:#statements}
+if $1; then
+	$0${VISUAL}
 fi
 endsnippet
 
@@ -84,9 +84,10 @@ done
 endsnippet
 
 snippet while "while ... (done)"
-while ${2:[[ ${1:condition} ]]}; do
-	${0:#statements}
+while $1; do
+	$2
 done
+$0
 endsnippet
 
 # vim:ft=snippets:
