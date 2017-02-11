@@ -2,6 +2,14 @@ priority -50
 
 extends texmath
 
+snippet verb "inline verbatim" w
+\verb|$1${VISUAL}|$0
+endsnippet
+
+snippet pverb "\PVerb{}" w
+\PVerb{$1${VISUAL}}$0
+endsnippet
+
 snippet "b(egin)?" "begin{} / end{}" br
 \begin{${1:something}}
 	${0:${VISUAL}}
@@ -58,7 +66,7 @@ $0
 endsnippet
 
 snippet part "Part" b
-\part{${1:part name}}
+\part{${1}}
 \label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
 
 ${0}
@@ -72,25 +80,25 @@ ${0}
 endsnippet
 
 snippet sec "Section" b
-\section{${1:section name}}
-\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-${0}
+%
+\section{${1}}
+%${0}
 endsnippet
+#\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 snippet sub "Subsection" b
-\subsection{${1:subsection name}}
-\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-${0}
+%
+\subsection{${1}}
+%${0}
 endsnippet
+#\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-snippet ssub "Subsubsection" b
-\subsubsection{${1:subsubsection name}}
-\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-${0}
+snippet subsub "Subsubsection" b
+%
+\subsubsection{${1}}
+%${0}
 endsnippet
+#\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 snippet par "Paragraph" b
 \paragraph{${1:paragraph name}}
@@ -112,7 +120,7 @@ ${0}
 endsnippet
 
 snippet pac "Package" b
-\usepackage[${1:options}]{${2:package}}$0
+\usepackage[${1}]{${2}}$0
 endsnippet
 
 snippet lp "Long parenthesis"
