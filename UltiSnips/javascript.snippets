@@ -7,6 +7,32 @@ snippet get "Get Elements"
 getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
 endsnippet
 
+snippet if "if" w
+if ($1) {
+	$0${VISUAL}
+}
+endsnippet
+
+snippet else "else" w
+else {
+	$0${VISUAL}
+}
+endsnippet
+
+snippet /* "/* ... */"
+/* $0 */
+endsnippet
+
+snippet mp "method preamble" w
+/**
+ * $1
+ *
+ * @param $2
+ * @return $3
+ * @throws $0
+ */
+endsnippet
+
 snippet '':f "object method string"
 '${1:${2:#thing}:${3:click}}': function(element) {
 	${VISUAL}$0
@@ -35,8 +61,23 @@ ${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}) {
 endsnippet
 
 snippet for "for (...) {...} (counting up)" b
-for (var ${1:i} = 0, ${2:len} = ${3:Things.length}; $1 < $2; $1++) {
+for ($1) {
 	${VISUAL}$0
+}
+endsnippet
+
+snippet while "while (...) {...}" b
+while ($1) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet try "try and catch" b
+try {
+	${VISUAL}$1
+}
+catch ($2) {
+	$0
 }
 endsnippet
 
@@ -46,8 +87,8 @@ for (var ${2:i} = ${1:Things.length} - 1; $2 >= 0; $2--) {
 }
 endsnippet
 
-snippet fun "function (fun)"
-function ${1:function_name}(${2:argument}) {
+snippet function "function (fun)"
+function ${1}(${2}) {
 	${VISUAL}$0
 }
 endsnippet
@@ -70,7 +111,7 @@ setTimeout(function() {
 }${2:.bind(${3:this})}, ${1:10});
 endsnippet
 
-snippet fi "for prop in obj using hasOwnProperty" b
+snippet forin "for prop in obj using hasOwnProperty" b
 for (${1:prop} in ${2:obj}){
 	if ($2.hasOwnProperty($1)) {
 		${VISUAL}$0
