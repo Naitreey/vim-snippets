@@ -7,7 +7,14 @@ priority -50
 #! header
 snippet #! "Shebang header for python scripts" b
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+# vim:fileencoding=utf-8
+$0
+endsnippet
+
+snippet coding "file encoding" b
+# -*- coding: utf-8 -*-
+# vim:fileencoding=utf-8
 $0
 endsnippet
 
@@ -16,9 +23,19 @@ if __name__ == '__main__':
 	${1:main()}$0
 endsnippet
 
+snippet while "while loop" w
+while $1:
+	$0${VISUAL}
+endsnippet
+
 snippet for "for loop" b
-for ${1:item} in ${2:iterable}:
-	${3:pass}
+for ${1} in ${2}:
+	${3}${VISUAL}
+endsnippet
+
+snippet with "with contect manager" b
+with ${1}:
+	${0}${VISUAL}
 endsnippet
 
 ##########
@@ -441,14 +458,19 @@ def __coerce__(self, other):
 	${25:pass}
 endsnippet
 
-snippet def "function with docstrings" b
-def ${1:function}(`!p
-if snip.indent:
-	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
-	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
-write_function_docstring(t, snip) `
-	${0:pass}
+snippet def "function" b
+def $1:
+	$0${VISUAL}
 endsnippet
+
+#snippet def "function with docstrings" b
+#def ${1:function}(`!p
+#if snip.indent:
+#	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+#	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
+#write_function_docstring(t, snip) `
+#	${0:pass}
+#endsnippet
 
 
 snippet defc "class method with docstrings" b
@@ -477,7 +499,7 @@ self.
 endsnippet
 
 snippet from "from module import name" b
-from ${1:module} import ${2:Stuff}
+from ${1} import ${2}
 endsnippet
 
 
@@ -519,66 +541,54 @@ endsnippet
 # If / Else / Elif #
 ####################
 snippet if "If" b
-if ${1:condition}:
-	${2:pass}
+if ${1}:
+	${2}${VISUAL}
 endsnippet
 
 snippet ife "If / Else" b
-if ${1:condition}:
-	${2:pass}
+if ${1}:
+	${2}
 else:
-	${3:pass}
+	${3}
 endsnippet
 
 snippet ifee "If / Elif / Else" b
-if ${1:condition}:
-	${2:pass}
-elif ${3:condition}:
-	${4:pass}
+if ${1}:
+	${2}
+elif ${3}:
+	${4}
 else:
-	${5:pass}
+	${5}
 endsnippet
 
+snippet elif "else if" b
+elif ${1}:
+	$0${VISUAL}
+endsnippet
 
+snippet else "else" b
+else:
+	$0${VISUAL}
+endsnippet
 ##########################
 # Try / Except / Finally #
 ##########################
-snippet try "Try / Except" b
+snippet try "try" b
 try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
+	${1}${VISUAL}
+except ${2}:
+	${0}
 endsnippet
 
-snippet try "Try / Except / Else" b
-try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
-else:
-	${5:pass}
+snippet except "except" b
+except ${1}:
+	$0${VISUAL}
 endsnippet
 
-snippet try "Try / Except / Finally" b
-try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
+snippet finally "finally" b
 finally:
-	${5:pass}
+	${1}${VISUAL}
 endsnippet
-
-snippet try "Try / Except / Else / Finally" b
-try:
-	${1:pass}
-except${2: ${3:Exception}, ${4:e}}:
-	${5:raise}
-else:
-	${6:pass}
-finally:
-	${7:pass}
-endsnippet
-
 
 #####################
 # Assertions & Tests #
@@ -653,7 +663,7 @@ endsnippet
 
 snippet doc "doc block (triple quotes)"
 `!p snip.rv = triple_quotes(snip)`
-${1:doc}
+${1}${VISUAL}
 `!p snip.rv = triple_quotes(snip)`
 endsnippet
 
