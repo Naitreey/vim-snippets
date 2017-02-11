@@ -6,11 +6,17 @@ snippet xml "XML declaration" b
 endsnippet
 
 snippet t "Simple tag" b
-<${1:tag}>
-	${2:content}
+<${1}>
+	${2}
 </${1/([\w:._-]+).*/$1/}>
 endsnippet
 
 snippet ti "Inline tag" b
-<${1:tag}>${2:content}</${1/([\w:._-]+).*/$1/}>
+<${1}>${2}</${1/([\w:._-]+).*/$1/}>
+endsnippet
+
+snippet com "Comment" b
+<!--
+${0}${VISUAL}
+-->
 endsnippet
