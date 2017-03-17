@@ -29,6 +29,8 @@ from io import open
 
 if sys.version_info[0] < 3:
     __metaclass__ = type
+	range = xrange
+	from itertools import imap as map
 endsnippet
 
 snippet ifmain "ifmain" b
