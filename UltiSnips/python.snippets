@@ -25,9 +25,9 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import sys
-from io import open
 
 if sys.version_info[0] < 3:
+    from io import open
     __metaclass__ = type
     range = xrange
     str = unicode
