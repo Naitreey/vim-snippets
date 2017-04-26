@@ -18,12 +18,14 @@ snippet coding "file encoding" b
 $0
 endsnippet
 
-snippet	compat "py3 compatible" b
+snippet future "insert future imports" b
 from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
+endsnippet
 
+snippet	compat "py3 compatible" b
 import sys
 PY3 = sys.version_info[0] == 3
 if not PY3:
