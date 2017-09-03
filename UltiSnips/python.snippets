@@ -34,6 +34,9 @@ if not PY3:
     range = xrange
     str = unicode
     from itertools import imap as map
+    py2_round = round
+    def round(*args, **kwargs):
+        return int(py2_round(*args, **kwargs))
 endsnippet
 
 snippet ifmain "ifmain" b
