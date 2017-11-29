@@ -263,12 +263,12 @@ snippet meta "XHTML <meta>" w
 <meta name="${1:name}" content="${2:content}"`!p x(snip)`>
 endsnippet
 
-snippet link "HTML <link>" w
-<link rel="${1:stylesheet}" href="${2}" type="text/css" charset="${5:utf-8}"`!p x(snip)` />
+snippet csslink "HTML <link>" w
+<link href="${2}" type="text/css" rel="${1:stylesheet}" />
 endsnippet
 
 snippet scriptsrc "XHTML <script src...>" w
-<script type="text/javascript" src="$1" charset="${3:utf-8}"></script>
+<script type="text/javascript" charset="utf-8" src="$1"></script>
 endsnippet
 
 snippet script "XHTML <script>" w
